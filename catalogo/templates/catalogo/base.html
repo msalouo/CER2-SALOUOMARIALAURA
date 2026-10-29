@@ -1,0 +1,28 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %}Fundación Patrimonio Vivo{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'catalogo/css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" href="{static 'catalogo/estilo.css'}">
+</head>
+<body>
+
+    <nav></nav>
+
+    <main>
+        {% block contenido %}
+        {% endblock %}
+    </main>
+
+    <footer></footer>
+
+    <script src="{% static 'catalogo/js/bootstrap.bundle.min.js' %}"></script>
+    
+</body>
+</html>
