@@ -1,0 +1,72 @@
+{% extends 'catalogo/base.html' %}
+
+{% block contenido %}
+
+<section class="py-5">
+    <div class="container-fluid px-5">
+
+        <div class="d-flex align-items-center justify-content-center gap-3 mb-4">
+            <hr class="flex-grow-1">
+            <h2 class="mb-0">LUGARES PATRIMONIALES</h2>
+            <hr class="flex-grow-1">
+        </div>
+
+        <div class="d-flex justify-content-center gap-3 mb-4 flex-wrap">
+
+            <a href="{% url 'catalogo' %}" class="btn btn-filtro">
+                Todas
+            </a>
+
+            {% for categoria in categorias %}
+                <a href="{% url 'catalogo' %}?categoria={{ categoria.id }}"
+                class="btn btn-filtro">
+                    {{ categoria.nombre }}
+                </a>
+            {% endfor %}
+
+        </div>
+
+        <div class="py-5 row g-5">
+
+            {% for lugar in lugares %}
+
+                <div class="col-md-4">
+                    <div class="card h-100">
+
+                        <img src="{{ lugar.imagen }}"
+                             alt="{{ lugar.nombre }}"
+                             class="card-img-top">
+
+                        <div class="card-body">
+
+                            <h3 class="card-title">
+                                {{ lugar.nombre }}
+                            </h3>
+
+                            <small class="text-muted">
+                                {{ lugar.ubicacion }}
+                            </small>
+
+                            <br>
+
+                            <a href="{% url 'detalles' lugar.id %}"
+                               class="btn btn-detalles">
+                                Ver detalles
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+
+            {% empty %}
+
+                <p>No hay lugares disponibles...</p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

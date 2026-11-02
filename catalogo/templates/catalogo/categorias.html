@@ -1,0 +1,51 @@
+{% extends 'catalogo/base.html' %}
+
+{% block contenido %}
+
+<section class="py-5">
+    <div class="container-fluid px-5">
+
+        <div class="d-flex align-items-center justify-content-center gap-3 mb-4">
+            <hr class="flex-grow-1">
+            <h2 class="mb-0">CATEGORÍAS</h2>
+            <hr class="flex-grow-1">
+        </div>
+
+        <div class="py-5 row g-4">
+
+            {% for categoria in categorias %}
+
+                <div class="col-md-4">
+                    <div class="card h-100">
+
+                        <img src="{{ categoria.imagen }}"
+                             alt="{{ categoria.nombre }}"
+                             class="card-img-top">
+
+                        <div class="card-body">
+
+                            <h3 class="card-title">{{ categoria.nombre }}</h3>
+
+                            <small class="text-muted">
+                                {{ categoria.descripcion }}
+                            </small>
+
+                            <br>
+
+                            <a href="{% url 'catalogo' %}?categoria={{ categoria.id }}"
+                               class="btn btn-detalles">
+                                Ver lugares
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

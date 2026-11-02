@@ -1,0 +1,83 @@
+{% extends 'catalogo/base.html' %}
+
+{% block contenido %}
+
+<section class="py-5">
+    <div class="container">
+
+        <div class="d-flex align-items-center justify-content-center gap-3 mb-4">
+            <hr class="flex-grow-1">
+            <h2 class="mb-0">AGREGAR LUGAR PATRIMONIAL</h2>
+            <hr class="flex-grow-1">
+        </div>
+
+        <form method="POST" class="row g-4 py-4">
+            {% csrf_token %}
+
+            <div class="col-md-6">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" name="nombre" id="nombre"
+                       class="form-control"
+                       placeholder="Nombre del lugar" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="ubicacion" class="form-label">Ubicación</label>
+                <input type="text" name="ubicacion" id="ubicacion"
+                       class="form-control"
+                       placeholder="Ubicación del lugar" required>
+            </div>
+
+            <div class="col-12">
+                <label for="descripcion" class="form-label">Descripción</label>
+                <textarea name="descripcion" id="descripcion"
+                          class="form-control" rows="5"
+                          placeholder="Describe el lugar patrimonial"
+                          required></textarea>
+            </div>
+
+            <div class="col-md-6">
+                <label for="anio" class="form-label">Año</label>
+                <input type="number" name="anio" id="anio"
+                       class="form-control"
+                       placeholder="Año de construcción">
+            </div>
+
+            <div class="col-md-6">
+                <label for="imagen" class="form-label">URL de la imagen</label>
+                <input type="url" name="imagen" id="imagen"
+                       class="form-control"
+                       placeholder="Ingresa la URL de la imagen">
+            </div>
+
+            <div class="col-12">
+                <label for="categoria" class="form-label">Categoría</label>
+
+                <select name="categoria" id="categoria"
+                        class="form-select" required>
+
+                    <option value="" selected disabled>
+                        Selecciona una categoría
+                    </option>
+
+                    {% for categoria in categorias %}
+                        <option value="{{ categoria.id }}">
+                            {{ categoria.nombre }}
+                        </option>
+                    {% endfor %}
+
+                </select>
+            </div>
+
+            <div class="col-12 text-center mt-4">
+                <button type="submit" class="btn">
+                    GUARDAR LUGAR
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+</section>
+
+{% endblock %}

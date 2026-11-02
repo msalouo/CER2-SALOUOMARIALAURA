@@ -1,0 +1,76 @@
+{% extends 'catalogo/base.html' %}
+
+{% block contenido %}
+
+<section class="py-5">
+    <div class="container">
+
+        <h2 class="text-center mb-4">{{ lugar.nombre }}</h2>
+
+        <div class="row g-4">
+
+            <div class="col-md-6">
+                <img src="{{ lugar.imagen }}"
+                     alt="{{ lugar.nombre }}"
+                     class="img-fluid rounded">
+            </div>
+
+            <div class="col-md-6">
+
+                <h4>Descripción</h4>
+                <p>{{ lugar.descripcion }}</p>
+
+                <p><strong>Ubicación:</strong> {{ lugar.ubicacion }}</p>
+
+                <p><strong>Año de construcción:</strong> {{ lugar.anio_construccion }}</p>
+
+                <p><strong>Categoría:</strong> {{ lugar.categoria.nombre }}</p>
+
+                <a href="{% url 'catalogo' %}" class="btn btn-dark">
+                    Volver al catálogo
+                </a>
+
+                {% if perms.catalogo.change_lugarpatrimonial %}
+
+                    <hr>
+
+                    <h3>Editar lugar patrimonial</h3>
+
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <label>Nombre:</label>
+                        <input type="text" name="nombre"
+                            value="{{ lugar.nombre }}" class="form-control mb-3">
+
+                        <label>Descripción:</label>
+                        <textarea name="descripcion"
+                                class="form-control mb-3">{{ lugar.descripcion }}</textarea>
+
+                        <label>Ubicación:</label>
+                        <input type="text" name="ubicacion"
+                            value="{{ lugar.ubicacion }}" class="form-control mb-3">
+
+                        <label>Año:</label>
+                        <input type="number" name="anio_construccion"
+                            value="{{ lugar.anio_construccion }}" class="form-control mb-3">
+
+                        <label>Imagen:</label>
+                        <input type="url" name="imagen"
+                            value="{{ lugar.imagen }}" class="form-control mb-3">
+
+                        <button type="submit" class="btn btn-dark">
+                            Guardar cambios
+                        </button>
+                    </form>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

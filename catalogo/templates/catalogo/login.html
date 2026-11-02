@@ -1,0 +1,52 @@
+{% extends 'catalogo/base.html' %}
+
+{% block contenido %}
+
+<section class="py-5">
+    <div class="container">
+
+        <div class="d-flex align-items-center justify-content-center gap-3 mb-4">
+            <hr class="flex-grow-1">
+            <h2 class="mb-0">ACCESO PERSONAL</h2>
+            <hr class="flex-grow-1">
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+
+                <form method="POST" class="row g-4 py-4">
+                    {% csrf_token %}
+
+                    <div class="col-12">
+                        <label for="username" class="form-label">
+                            Nombre de usuario
+                        </label>
+                        <input type="text" id="username" name="username"
+                               class="form-control"
+                               placeholder="Ingresa tu nombre de usuario" required>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="password" class="form-label">
+                            Contraseña
+                        </label>
+                        <input type="password" id="password" name="password"
+                               class="form-control"
+                               placeholder="Ingresa tu contraseña" required>
+                    </div>
+
+                    <div class="col-12 text-center mt-4">
+                        <button type="submit" class="btn">
+                            INICIAR SESIÓN
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}
