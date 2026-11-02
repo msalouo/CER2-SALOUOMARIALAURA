@@ -80,26 +80,6 @@ Ingresar a la carpeta del proyecto:
 cd NOMBRE_DE_LA_CARPETA
 ```
 
-### 3.2 Crear un entorno virtual
-
-```bash
-python -m venv venv
-```
-
-Activar el entorno virtual en Windows:
-
-```bash
-venv\Scripts\activate
-```
-
-### 3.3 Instalar las dependencias
-
-Con el entorno virtual activado, ejecutar:
-
-```bash
-pip install -r requirements.txt
-```
-
 ## 4. Configuración de la base de datos
 
 El proyecto utiliza SQLite, la base de datos predeterminada de Django.
