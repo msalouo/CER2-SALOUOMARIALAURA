@@ -25,13 +25,13 @@ def categorias(request):
     categorias = Categoria.objects.all()
     return render(request, 'catalogo/categorias.html', {'categorias': categorias})
 
-@login_required(login_url='login')
-@permission_required('catalogo.change_lugarpatrimonial', raise_exception=True)
 def detalles(request, id):
-
     lugar = get_object_or_404(LugarPatrimonial, id=id)
 
     if request.method == 'POST':
+
+        if not request.user.has_perm('catalogo.change_lugarpatrimonial'):
+            return redirect('catalogo')
 
         lugar.nombre = request.POST.get('nombre')
         lugar.descripcion = request.POST.get('descripcion')
@@ -118,26 +118,3 @@ def crear_lugar(request):
 
     return render(request, 'catalogo/crear_lugar.html', {
         'categorias': categorias})
-
-@login_required(login_url='login')
-@permission_required('catalogo.change_lugarpatrimonial', raise_exception=True)
-def editar_lugar(request, id):
-
-    lugar = LugarPatrimonial.objects.get(id=id)
-
-    if request.method == 'POST':
-
-        lugar.nombre = request.POST.get('nombre')
-        lugar.descripcion = request.POST.get('descripcion')
-        lugar.ubicacion = request.POST.get('ubicacion')
-        lugar.anio_construccion = request.POST.get('anio_construccion') or None
-        lugar.imagen = request.POST.get('imagen')
-
-        categoria_id = request.POST.get('categoria')
-        lugar.categoria = Categoria.objects.get(id=categoria_id)
-
-        lugar.save()
-
-        return redirect('catalogo')
-
-    return redirect('catalogo')
