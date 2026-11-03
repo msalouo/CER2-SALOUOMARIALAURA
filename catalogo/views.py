@@ -25,10 +25,27 @@ def categorias(request):
     categorias = Categoria.objects.all()
     return render(request, 'catalogo/categorias.html', {'categorias': categorias})
 
-def detalles(request, id ):
+@login_required(login_url='login')
+@permission_required('catalogo.change_lugarpatrimonial', raise_exception=True)
+def detalles(request, id):
+
     lugar = get_object_or_404(LugarPatrimonial, id=id)
 
-    return render(request, 'catalogo/detalles.html', {'lugar': lugar})
+    if request.method == 'POST':
+
+        lugar.nombre = request.POST.get('nombre')
+        lugar.descripcion = request.POST.get('descripcion')
+        lugar.ubicacion = request.POST.get('ubicacion')
+        lugar.anio_construccion = request.POST.get('anio_construccion')
+        lugar.imagen = request.POST.get('imagen')
+
+        lugar.save()
+
+        return redirect('detalles', id=lugar.id)
+
+    return render(request, 'catalogo/detalles.html', {
+        'lugar': lugar
+    })
 
 def iniciar_sesion(request):
 
