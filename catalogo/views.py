@@ -99,7 +99,7 @@ def crear_lugar(request):
         nombre = request.POST.get('nombre')
         descripcion = request.POST.get('descripcion')
         ubicacion = request.POST.get('ubicacion')
-        anio = request.POST.get('anio')
+        anio_construccion = request.POST.get('anio_construccion')
         imagen = request.POST.get('imagen')
         categoria_id = request.POST.get('categoria')
 
@@ -109,7 +109,7 @@ def crear_lugar(request):
             nombre = nombre,
             descripcion = descripcion,
             ubicacion = ubicacion,
-            anio = anio,
+            anio_construccion = anio_construccion,
             imagen = imagen,
             categoria = categoria
         )
